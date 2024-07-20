@@ -16,13 +16,17 @@ import json
 import requests
 import smtplib
 from email.utils import formatdate
+from os import environ
 
-# define endpoint and credentials 
-api_key = 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
-api_secret = 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
-host = 'firewall.host.name'
-recipients = 'your@email.address'
-rcpt_name = 'Your Name'
+try:  
+   api_key = environ["KEY"]
+   api_secret = environ["SECRET"]
+   host = environ["HOST"]
+   recipients = environ["EMAIL"]
+   rcpt_name = environ["NAME"]
+except KeyError: 
+   print "One or more environment variables not defined"
+   sys.exit(1)
 
 url = 'https://' + host + '/api/core/firmware/status'
 sender = 'root@' + host
