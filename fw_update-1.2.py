@@ -34,7 +34,7 @@ message += 'Subject: Updates for OPNsense\r\n'
 message += formatdate(localtime=True) + '\r\n'
 
 # request data
-r = requests.get(url,verify=True,auth=(api_key, api_secret))
+r = requests.post(url,verify=True,auth=(api_key, api_secret))
 if r.status_code == 200:
     response = json.loads(r.text)
     if response['status'] == 'ok':
