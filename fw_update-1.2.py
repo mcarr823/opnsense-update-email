@@ -29,6 +29,16 @@ except KeyError:
    print("One or more environment variables not defined")
    sys.exit(1)
 
+
+# Require HTTPS verification by default
+verify = True
+
+# If VERIFY environment variable is set, and its value is anything other
+# than "true", disable HTTPS verification
+if 'VERIFY' in environ:
+    verify = environ['VERIFY'] == 'true'
+    
+
 url = 'https://' + host + '/api/core/firmware/status'
 sender = 'root@' + host
 message  = 'From: OPNsense Firewall <root@' + host + '>\r\n'
@@ -39,7 +49,13 @@ message += 'Subject: Updates for OPNsense\r\n'
 message += formatdate(localtime=True) + '\r\n'
 
 # request data
-r = requests.post(url,verify=True,auth=(api_key, api_secret))
+try:
+    r = requests.post(url,verify=verify,auth=(api_key, api_secret))
+except requests.exceptions.SSLError as e:
+    print("SSL verification failed")
+    print("Either set VERIFY=false, or trust your router's certificate")
+    sys.exit(1)
+
 if r.status_code == 200:
     response = json.loads(r.text)
     if response['status'] == 'ok':
