@@ -1,4 +1,4 @@
-#!/usr/local/bin/python
+#!/env/python3
 
 ###################################################################
 # This script makes an API connection to OPNsense                 #
@@ -15,6 +15,7 @@
 import json
 import requests
 import smtplib
+import sys
 from email.utils import formatdate
 from os import environ
 
@@ -25,7 +26,7 @@ try:
    recipients = environ["EMAIL"]
    rcpt_name = environ["NAME"]
 except KeyError: 
-   print "One or more environment variables not defined"
+   print("One or more environment variables not defined")
    sys.exit(1)
 
 url = 'https://' + host + '/api/core/firmware/status'
@@ -77,5 +78,5 @@ if r.status_code == 200:
         s = smtplib.SMTP('localhost')
         s.sendmail(sender,recipients,message)
 else:
-    print ('Connection / Authentication issue, response received:')
-    print r.text
+    print('Connection / Authentication issue, response received:')
+    print(r.text)
