@@ -14,6 +14,8 @@ You can run this script by specifying the following environment variables:
 | SENDER | NO | Email address from which to send the email | root@$HOST |
 | SMTP_HOST | NO | IP or hostname of the SMTP server | localhost |
 | SMTP_PORT | NO | Port on which the SMTP server is listening | 25 |
+| SMTP_USER | NO | Username for authenticating requests to the SMTP server | |
+| SMTP_PASS | NO | Password for authenticating requests to the SMTP server | |
 
 For example:
 

@@ -32,6 +32,16 @@ except KeyError:
 sender = environ["SENDER"] if 'SENDER' in environ else 'root@' + host
 emailHost = environ["SMTP_HOST"] if 'SMTP_HOST' in environ else 'localhost'
 port = environ["SMTP_PORT"] if 'SMTP_PORT' in environ else 25
+username = environ["SMTP_USER"] if 'SMTP_USER' in environ else ''
+password = environ["SMTP_PASS"] if 'SMTP_PASS' in environ else ''
+
+# Check if username or password are defined.
+# If one is defined, then the other must be as well.
+# But if neither is defined, then that's fine.
+if len(username) > 0 or len(password) > 0:
+    if len(username) == 0 or len(password) == 0:
+        print("SMTP username or password not defined")
+        sys.exit(1)
 
 # Require HTTPS verification by default
 verify = True
@@ -95,6 +105,8 @@ if r.status_code == 200:
         if response['upgrade_needs_reboot'] == '1':
             message += '<h3>This requires a reboot</h3>'
         s = smtplib.SMTP(emailHost, port)
+        if len(username) > 0 and len(password) > 0:
+            s.login(username, password)
         s.sendmail(sender,recipients,message)
 else:
     print('Connection / Authentication issue, response received:')
