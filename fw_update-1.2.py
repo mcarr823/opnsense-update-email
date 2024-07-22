@@ -44,9 +44,10 @@ url = 'https://' + host + '/api/core/firmware/status'
 message  = 'From: OPNsense Firewall <' + sender + '>\r\n'
 message += 'To: ' + rcpt_name + '<' + recipients + '>\r\n'
 message += 'MIME-Version: 1.0\r\n'
-message += 'Content-type: text/html\r\n'
+message += 'Content-Type: text/html\r\n'
 message += 'Subject: Updates for OPNsense\r\n'
-message += formatdate(localtime=True) + '\r\n'
+message += 'Date: ' + formatdate(localtime=True) + '\r\n'
+message += '\r\n'
 
 # request data
 try:
