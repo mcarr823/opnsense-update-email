@@ -12,6 +12,8 @@ You can run this script by specifying the following environment variables:
 | EMAIL    | YES   | Email alert recipient's email address | |
 | NAME    | YES   | Name of the email recipient | |
 | SENDER | NO | Email address from which to send the email | root@$HOST |
+| SMTP_HOST | NO | IP or hostname of the SMTP server | localhost |
+| SMTP_PORT | NO | Port on which the SMTP server is listening | 25 |
 
 For example:
 

@@ -30,6 +30,8 @@ except KeyError:
    sys.exit(1)
 
 sender = environ["SENDER"] if 'SENDER' in environ else 'root@' + host
+emailHost = environ["SMTP_HOST"] if 'SMTP_HOST' in environ else 'localhost'
+port = environ["SMTP_PORT"] if 'SMTP_PORT' in environ else 25
 
 # Require HTTPS verification by default
 verify = True
@@ -92,7 +94,7 @@ if r.status_code == 200:
         message += '<br>Click <a href=\"https://' + host + '/ui/core/firmware/\">here</a> to fetch them.<br>\r\n'
         if response['upgrade_needs_reboot'] == '1':
             message += '<h3>This requires a reboot</h3>'
-        s = smtplib.SMTP('localhost')
+        s = smtplib.SMTP(emailHost, port)
         s.sendmail(sender,recipients,message)
 else:
     print('Connection / Authentication issue, response received:')
