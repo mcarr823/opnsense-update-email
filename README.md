@@ -11,6 +11,7 @@ You can run this script by specifying the following environment variables:
 | HOST    | YES   | Email server. Hostname or IP address | |
 | EMAIL    | YES   | Email alert recipient's email address | |
 | NAME    | YES   | Name of the email recipient | |
+| SENDER | NO | Email address from which to send the email | root@$HOST |
 
 For example:
 

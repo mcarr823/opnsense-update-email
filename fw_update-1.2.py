@@ -29,6 +29,7 @@ except KeyError:
    print("One or more environment variables not defined")
    sys.exit(1)
 
+sender = environ["SENDER"] if 'SENDER' in environ else 'root@' + host
 
 # Require HTTPS verification by default
 verify = True
@@ -40,8 +41,7 @@ if 'VERIFY' in environ:
     
 
 url = 'https://' + host + '/api/core/firmware/status'
-sender = 'root@' + host
-message  = 'From: OPNsense Firewall <root@' + host + '>\r\n'
+message  = 'From: OPNsense Firewall <' + sender + '>\r\n'
 message += 'To: ' + rcpt_name + '<' + recipients + '>\r\n'
 message += 'MIME-Version: 1.0\r\n'
 message += 'Content-type: text/html\r\n'
