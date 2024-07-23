@@ -18,6 +18,7 @@ import smtplib
 import sys
 from email.utils import formatdate
 from os import environ
+import urllib3
 
 try:  
    api_key = environ["KEY"]
@@ -50,7 +51,11 @@ verify = True
 # than "true", disable HTTPS verification
 if 'VERIFY' in environ:
     verify = environ['VERIFY'] == 'true'
-    
+
+if not verify:
+    # Disable verification warnings, since we're intentionally disabling it
+    urllib3.disable_warnings()
+
 
 # If ALERT_NO_UPDATES is set to "true", then send an email even if there
 # aren't any updates available.
