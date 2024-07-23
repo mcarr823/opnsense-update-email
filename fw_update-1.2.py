@@ -120,7 +120,7 @@ if r.status_code == 200:
 
     elif alertNoUpdates:
 
-        message = "<p>No updates available</p>"
+        message += "<p>No updates available</p>"
 
         # Append the time.
         # This is important for testing, since sending identical emails
