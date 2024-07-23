@@ -117,8 +117,8 @@ if r.status_code == 200:
         if len(username) > 0 and len(password) > 0:
             s.login(username, password)
         s.sendmail(sender,recipients,message)
-        
-    else if alertNoUpdates:
+
+    elif alertNoUpdates:
 
         message = "<p>No updates available</p>"
 
