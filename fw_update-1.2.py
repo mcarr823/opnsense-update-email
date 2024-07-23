@@ -52,6 +52,13 @@ if 'VERIFY' in environ:
     verify = environ['VERIFY'] == 'true'
     
 
+# If ALERT_NO_UPDATES is set to "true", then send an email even if there
+# aren't any updates available.
+# This is intended for testing purposes, to make sure the setup actually
+# works before relying on it for update notifications.
+alertNoUpdates = 'ALERT_NO_UPDATES' in environ and environ['ALERT_NO_UPDATES'] == 'true'
+
+
 url = 'https://' + host + '/api/core/firmware/status'
 message  = 'From: OPNsense Firewall <' + sender + '>\r\n'
 message += 'To: ' + rcpt_name + '<' + recipients + '>\r\n'
@@ -104,10 +111,27 @@ if r.status_code == 200:
         message += '<br>Click <a href=\"https://' + host + '/ui/core/firmware/\">here</a> to fetch them.<br>\r\n'
         if response['upgrade_needs_reboot'] == '1':
             message += '<h3>This requires a reboot</h3>'
+        else:
+            pass # TODO auto apply
         s = smtplib.SMTP(emailHost, port)
         if len(username) > 0 and len(password) > 0:
             s.login(username, password)
         s.sendmail(sender,recipients,message)
+        
+    else if alertNoUpdates:
+
+        message = "<p>No updates available</p>"
+
+        # Append the time.
+        # This is important for testing, since sending identical emails
+        # can be interpreted as spam or an accident, resulting in non-delivery.
+        message += "<p>Last checked at: "+formatdate(localtime=True)+"</p>"
+
+        s = smtplib.SMTP(emailHost, port)
+        if len(username) > 0 and len(password) > 0:
+            s.login(username, password)
+        s.sendmail(sender,recipients,message)
+
 else:
     print('Connection / Authentication issue, response received:')
     print(r.text)

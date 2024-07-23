@@ -16,6 +16,7 @@ You can run this script by specifying the following environment variables:
 | SMTP_PORT | NO | Port on which the SMTP server is listening | 25 |
 | SMTP_USER | NO | Username for authenticating requests to the SMTP server | |
 | SMTP_PASS | NO | Password for authenticating requests to the SMTP server | |
+| ALERT_NO_UPDATES | NO | If set to 'true', send an email even if there are no updates | |
 
 For example:
 
