@@ -29,3 +29,32 @@ EMAIL=myemailaddress@test.com \
 NAME=MyName \
 python3 fw_update-1.2.py
 ```
+
+## Docker
+
+This program can also be run with docker.
+
+For example:
+
+```
+VERIFY=false \
+KEY=xxx \
+SECRET=xxx \
+HOST=192.168.1.1 \
+EMAIL=myemailaddress@test.com \
+NAME=MyName \
+docker run -it --rm \
+-e VERIFY \
+-e KEY \
+-e SECRET \
+-e HOST \
+-e EMAIL \
+-e NAME \
+ghcr.io/mcarr823/opnsense-update-check
+```
+
+* Note that SMTP_HOST will likely need to be set to something other localhost, depending on the networking of the docker command.
+
+ie. If you run the docker command without host networking, you'll likely need to use the SMTP server's external IP address and perhaps open up that port on the machine's firewall, even if this program and the SMTP server are on the same machine.
+
+Alternatively, if both are running in docker containers, you can add them both to the same docker network.
