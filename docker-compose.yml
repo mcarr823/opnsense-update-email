@@ -1,0 +1,16 @@
+services:
+  node:
+    image: ghcr.io/mcarr823/opnsense-update-check
+    environment:
+      VERIFY: 'false'
+      KEY: ''
+      SECRET: ''
+      HOST: ''
+      EMAIL: ''
+      NAME: ''
+      SENDER: ''
+      SMTP_HOST: ''
+      SMTP_PORT: 25
+      SMTP_USER: ''
+      SMTP_PASS: ''
+      ALERT_NO_UPDATES: 'true'
