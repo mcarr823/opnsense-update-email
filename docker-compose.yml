@@ -1,6 +1,7 @@
 services:
   node:
-    image: ghcr.io/mcarr823/opnsense-update-check
+    image: ghcr.io/mcarr823/opnsense-update-check:amd64
+    #image: ghcr.io/mcarr823/opnsense-update-check:arm64
     environment:
       VERIFY: 'false'
       KEY: ''

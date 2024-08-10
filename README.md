@@ -34,6 +34,10 @@ python3 fw_update-1.2.py
 
 This program can also be run with docker.
 
+Docker images are available for both amd64 and arm64/aarch64, with a different tag for each:
+- :amd64
+- :arm64
+
 For example:
 
 ```
@@ -50,7 +54,7 @@ docker run -it --rm \
 -e HOST \
 -e EMAIL \
 -e NAME \
-ghcr.io/mcarr823/opnsense-update-check
+ghcr.io/mcarr823/opnsense-update-check:amd64
 ```
 
 * Note that SMTP_HOST will likely need to be set to something other localhost, depending on the networking of the docker command.
