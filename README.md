@@ -1,4 +1,8 @@
 # opnsense-update-email
+
+[![Docker Image amd64](https://github.com/mcarr823/opnsense-update-email/actions/workflows/docker-amd64.yml/badge.svg)](https://github.com/mcarr823/opnsense-update-email/actions/workflows/docker-amd64.yml)
+[![Docker Image arm64](https://github.com/mcarr823/opnsense-update-email/actions/workflows/docker-aarch64.yml/badge.svg)](https://github.com/mcarr823/opnsense-update-email/actions/workflows/docker-aarch64.yml)
+
 Python script to check an OPNsense firewall for available updates and send an email if any are available
 
 You can run this script by specifying the following environment variables:
